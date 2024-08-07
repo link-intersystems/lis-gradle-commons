@@ -1,33 +1,30 @@
 package com.link_intersystems.gradle.project.builder;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static java.util.Objects.requireNonNull;
 
 public class AbstractProjectBuilder {
-    private final File projectRootDir;
+    private final Path projectRootDir;
     private final ScriptLanguage scriptLanguage;
-    private final File buildFile;
+    private final Path buildFile;
 
-    public AbstractProjectBuilder(File projectRootDir, ScriptLanguage scriptLanguage) throws IOException {
+    public AbstractProjectBuilder(Path projectRootDir, ScriptLanguage scriptLanguage) throws IOException {
         this.projectRootDir = requireNonNull(projectRootDir);
         this.scriptLanguage = requireNonNull(scriptLanguage);
 
-        buildFile = new File(this.projectRootDir, scriptLanguage.buildFileName());
+        buildFile = this.projectRootDir.resolve(scriptLanguage.buildFileName());
 
-        if (!projectRootDir.isDirectory()) {
-            if (!this.projectRootDir.mkdirs()) {
-                throw new IllegalStateException("Failed to create directory " + projectRootDir.getAbsolutePath());
-            }
+        if (!Files.isDirectory(projectRootDir)) {
+            Files.createDirectories(this.projectRootDir);
         }
 
-        if (!buildFile.createNewFile()) {
-            throw new IllegalStateException("Failed to create new file " + buildFile.getAbsolutePath());
-        }
+        Files.createFile(buildFile);
     }
 
-    protected File getProjectRootDir() {
+    protected Path getProjectRootDir() {
         return projectRootDir;
     }
 
@@ -35,7 +32,7 @@ public class AbstractProjectBuilder {
         return scriptLanguage;
     }
 
-    public FileContentBuilder buildFile() {
-        return new FileContentBuilder(buildFile);
+    public FileContent buildFile() {
+        return new FileContent(buildFile);
     }
 }

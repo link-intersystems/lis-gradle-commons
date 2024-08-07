@@ -1,22 +1,20 @@
 package com.link_intersystems.gradle.project.builder;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 import static java.util.Objects.requireNonNull;
 
-public class FileContentBuilder {
+public class FileContent {
 
-    public interface AppendableConsumer {
-        void accept(Appendable appendable) throws IOException;
-    }
+    private final Path filepath;
 
-    private final File file;
-
-    public FileContentBuilder(File file) {
-        this.file = requireNonNull(file);
+    public FileContent(Path filepath) {
+        this.filepath = requireNonNull(filepath);
     }
 
     public void append(String contentToAppend) {
@@ -30,7 +28,8 @@ public class FileContentBuilder {
     }
 
     public void append(AppendableConsumer contentAppender) {
-        try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(file, true))) {
+
+        try (PrintWriter printWriter = new PrintWriter(Files.newBufferedWriter(filepath, CREATE, APPEND))) {
             contentAppender.accept(printWriter);
         } catch (IOException e) {
             throw new RuntimeException(e);

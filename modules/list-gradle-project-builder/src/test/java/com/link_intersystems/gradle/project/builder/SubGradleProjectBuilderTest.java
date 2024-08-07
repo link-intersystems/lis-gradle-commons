@@ -9,20 +9,20 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SubProjectBuilderTest {
+class SubGradleProjectBuilderTest {
 
-    private SubProjectBuilder subProjectBuilder;
+    private GradleSubProjectBuilder gradleSubProjectBuilder;
     private File tempDir;
 
     @BeforeEach
     void setUp(@TempDir File tempDir) throws IOException {
-        subProjectBuilder = new SubProjectBuilder(new File(tempDir, "test"), ScriptLanguage.KTS);
+        gradleSubProjectBuilder = new GradleSubProjectBuilder(tempDir.toPath().resolve("test"), ScriptLanguage.KTS);
         this.tempDir = tempDir;
     }
 
     @Test
     void buildFile() {
-        subProjectBuilder.buildFile().append("plugins {}");
+        gradleSubProjectBuilder.buildFile().append("plugins {}");
 
         assertThat(new File(tempDir, "test/build.gradle.kts")).hasContent("plugins {}");
     }
