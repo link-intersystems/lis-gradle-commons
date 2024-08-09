@@ -13,9 +13,12 @@ java {
 
 signing {
     val signingKey = providers.environmentVariable("GPG_SIGNING_KEY")
-    useInMemoryPgpKeys(signingKey.get(), null)
-    sign(publishing.publications)
-    logger.lifecycle("Signing publications")
+    val signingPassphrase = providers.environmentVariable("GPG_SIGNING_PASSPHRASE")
+    if (signingKey.isPresent) {
+        useInMemoryPgpKeys(signingKey.get(), signingPassphrase.orNull)
+        sign(publishing.publications)
+        logger.lifecycle("Signing publications")
+    }
 }
 
 afterEvaluate {
