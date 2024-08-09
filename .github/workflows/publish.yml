@@ -46,4 +46,4 @@ jobs:
       run: |
          export GPG_KEY_FINGERPRINT=${{ secrets.OSSRH_GPG_FINGERPRINT }}
          export GPG_SIGNING_PASSPHRASE=${{ secrets.OSSRH_GPG_SIGNING_PASSPHRASE }} 
-         ./gradlew_gpg ${{ secrets.OSSRH_GPG_FINGERPRINT }} build
+         ./gradlew_gpg build
