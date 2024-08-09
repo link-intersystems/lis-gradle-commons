@@ -11,19 +11,20 @@ fi
 fi
 
 
-
-echo -n "Enter passphrase: "
-unset GPG_SIGNING_PASSPHRASE
-while IFS= read -r -s -n1 pass; do
-  if [[ -z $pass ]]; then
-     echo
-     break
-  else
-     echo -n '*'
-     GPG_SIGNING_PASSPHRASE+=$pass
-  fi
-done
-export GPG_SIGNING_PASSPHRASE
+if [ -z "${GPG_SIGNING_PASSPHRASE}" ]; then
+  echo -n "Enter passphrase: "
+  unset GPG_SIGNING_PASSPHRASE
+  while IFS= read -r -s -n1 pass; do
+    if [[ -z $pass ]]; then
+       echo
+       break
+    else
+       echo -n '*'
+       GPG_SIGNING_PASSPHRASE+=$pass
+    fi
+  done
+  export GPG_SIGNING_PASSPHRASE
+fi
 
 GPG_SIGNING_KEY=$(echo ${GPG_SIGNING_PASSPHRASE} |gpg --pinentry-mode=loopback --passphrase-fd 0 -a --export-secret-keys $GPG_KEY_FINGERPRINT)
 export GPG_SIGNING_KEY
