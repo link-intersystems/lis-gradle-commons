@@ -43,4 +43,4 @@ jobs:
          gpg --list-secret-keys --keyid-format LONG
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew_gpg build
+      run: ./gradlew_gpg build ${{ secrets.OSSRH_GPG_FINGERPRINT }}
