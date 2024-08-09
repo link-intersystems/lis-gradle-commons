@@ -9,10 +9,8 @@ name: Publish
 
 on:
   push:
-    branches:
-      - "feature/**"
-#    tags:
-#      - 'v[0-9]+.[0-9]+.[0-9]+'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 
 jobs:
@@ -45,4 +43,4 @@ jobs:
     - name: Build with Gradle Wrapper
       run: |
          export GPG_SIGNING_KEY="${{ secrets.OSSRH_GPG_SECRET_KEY }}"
-         ./gradlew build
+         ./gradlew build publishAllPublicationsToSonatypeRepository
