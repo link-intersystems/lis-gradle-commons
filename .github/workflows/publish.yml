@@ -43,4 +43,5 @@ jobs:
     - name: Build with Gradle Wrapper
       run: |
          export GPG_SIGNING_KEY="${{ secrets.OSSRH_GPG_SECRET_KEY }}"
+         export GPG_SIGNING_PASSPHRASE=""
          ./gradlew build publishAllPublicationsToSonatypeRepository

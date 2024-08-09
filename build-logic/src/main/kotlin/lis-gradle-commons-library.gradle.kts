@@ -11,6 +11,16 @@ java {
     }
 }
 
+signing {
+    val signingKey = providers.environmentVariable("GPG_SIGNING_KEY")
+    val signingPassphrase = providers.environmentVariable("GPG_SIGNING_PASSPHRASE")
+    if (signingKey.isPresent && signingPassphrase.isPresent) {
+        useInMemoryPgpKeys(signingKey.get(), signingPassphrase.get())
+        sign(publishing.publications)
+        logger.lifecycle("Signing publications")
+    }
+}
+
 afterEvaluate {
     publishing {
         publications.withType<MavenPublication> {
