@@ -32,4 +32,20 @@ class FileContentTest {
 
         assertThat(testFile).hasContent("Hello");
     }
+
+    @Test
+    void print(@TempDir Path tempPath) {
+
+        Path testFile = tempPath.resolve("test.txt");
+        FileContent fileContent = new FileContent(testFile);
+
+        fileContent.append(printWriter -> {
+            printWriter.println("plugins {");
+            printWriter.println("\t`java-library`");
+            printWriter.println("}");
+        });
+
+        String lineSeparator = System.lineSeparator();
+        assertThat(testFile).hasContent("plugins {" + lineSeparator + "\t`java-library`" + lineSeparator + "}");
+    }
 }

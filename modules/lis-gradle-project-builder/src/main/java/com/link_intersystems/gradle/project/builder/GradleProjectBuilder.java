@@ -10,6 +10,8 @@ public class GradleProjectBuilder extends AbstractProjectBuilder {
 
     private final Path settingsFile;
 
+    private final Path propertiesFile;
+
     public static GradleProjectBuilder rootProject(Path projectRoot) throws IOException {
         return rootProject(projectRoot, ScriptLanguage.KTS);
     }
@@ -26,10 +28,12 @@ public class GradleProjectBuilder extends AbstractProjectBuilder {
         settingsFile = projectRoot.resolve(scriptLanguage.settingsFileName());
         Files.createFile(settingsFile);
 
+        propertiesFile = projectRoot.resolve("gradle.properties");
+
         this.projectRoot = requireNonNull(projectRoot);
     }
 
-    public GradleProjectBuilder withCompositeBuild(String path) throws IOException {
+    public GradleProjectBuilder createCompositeBuild(String path) throws IOException {
         Path compositeBuildRootPath = projectRoot.resolve(path);
 
         Files.createDirectories(compositeBuildRootPath);
@@ -37,17 +41,21 @@ public class GradleProjectBuilder extends AbstractProjectBuilder {
         return rootProject(compositeBuildRootPath);
     }
 
-    public GradleSubProjectBuilder withModule(String path) throws IOException {
-        return withModule(path, getScriptLanguage());
+    public GradleSubprojectBuilder createSubproject(String path) throws IOException {
+        return createSubproject(path, getScriptLanguage());
     }
 
-    public GradleSubProjectBuilder withModule(String path, ScriptLanguage scriptLanguage) throws IOException {
+    public GradleSubprojectBuilder createSubproject(String path, ScriptLanguage scriptLanguage) throws IOException {
 
-        return new GradleSubProjectBuilder(getProjectRootDir().resolve(path), scriptLanguage);
+        return new GradleSubprojectBuilder(getProjectRootDir().resolve(path), scriptLanguage);
     }
 
     public FileContent settingsFile() {
         return new FileContent(settingsFile);
+    }
+
+    public PropertiesFileContent gradleProperties() {
+        return new PropertiesFileContent(propertiesFile);
     }
 
 }

@@ -19,21 +19,15 @@ public class FileContent {
 
     public void append(String contentToAppend) {
         append(appender -> {
-            try {
-                appender.append(contentToAppend);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            appender.append(contentToAppend);
         });
     }
 
-    public void append(AppendableConsumer contentAppender) {
-
+    public void append(IOConsumer<PrintWriter> contentPrinter) {
         try (PrintWriter printWriter = new PrintWriter(Files.newBufferedWriter(filepath, CREATE, APPEND))) {
-            contentAppender.accept(printWriter);
+            contentPrinter.accept(printWriter);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

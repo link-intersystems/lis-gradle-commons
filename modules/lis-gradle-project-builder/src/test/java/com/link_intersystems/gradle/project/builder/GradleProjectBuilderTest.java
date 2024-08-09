@@ -23,8 +23,8 @@ class GradleProjectBuilderTest {
     }
 
     @Test
-    void withCompositeBuild() throws IOException {
-        GradleProjectBuilder includedBuildA = gradleProjectBuilder.withCompositeBuild("includedBuildA");
+    void createCompositeBuild() throws IOException {
+        GradleProjectBuilder includedBuildA = gradleProjectBuilder.createCompositeBuild("includedBuildA");
 
         assertThat(includedBuildA).isNotNull();
         assertThat(includedBuildA.getProjectRootDir()).isEqualTo(tempDir.resolve("includedBuildA"));
@@ -33,16 +33,16 @@ class GradleProjectBuilderTest {
     }
 
     @Test
-    void withModule() throws IOException {
-        gradleProjectBuilder.withModule("moduleA");
+    void createSubproject() throws IOException {
+        gradleProjectBuilder.createSubproject("moduleA");
 
         assertThat(tempDir.resolve("moduleA/build.gradle.kts")).exists();
 
     }
 
     @Test
-    void withModuleOtherScriptLanguage() throws IOException {
-        gradleProjectBuilder.withModule("moduleA", ScriptLanguage.GROOVY);
+    void createSubprojectOtherScriptLanguage() throws IOException {
+        gradleProjectBuilder.createSubproject("moduleA", ScriptLanguage.GROOVY);
 
         assertThat(tempDir.resolve("moduleA/build.gradle")).exists();
     }
@@ -52,5 +52,12 @@ class GradleProjectBuilderTest {
         gradleProjectBuilder.settingsFile().append("rootProject.name = \"test\"\n");
 
         Assertions.assertThat(tempDir.resolve("settings.gradle.kts")).hasContent("rootProject.name = \"test\"\n");
+    }
+
+    @Test
+    void gradleProperties() {
+        gradleProjectBuilder.gradleProperties().append("version = \"1.0.0\"\n");
+
+        Assertions.assertThat(tempDir.resolve("gradle.properties")).hasContent("version = \"1.0.0\"\n");
     }
 }

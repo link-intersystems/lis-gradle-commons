@@ -9,14 +9,14 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SubGradleProjectBuilderTest {
+class GradleSubprojectBuilderTest {
 
-    private GradleSubProjectBuilder gradleSubProjectBuilder;
+    private GradleSubprojectBuilder gradleSubProjectBuilder;
     private File tempDir;
 
     @BeforeEach
     void setUp(@TempDir File tempDir) throws IOException {
-        gradleSubProjectBuilder = new GradleSubProjectBuilder(tempDir.toPath().resolve("test"), ScriptLanguage.KTS);
+        gradleSubProjectBuilder = new GradleSubprojectBuilder(tempDir.toPath().resolve("test"), ScriptLanguage.KTS);
         this.tempDir = tempDir;
     }
 
