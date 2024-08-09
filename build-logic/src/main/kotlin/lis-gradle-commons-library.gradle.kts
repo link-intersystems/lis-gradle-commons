@@ -5,6 +5,12 @@ plugins {
     id("com.link-intersystems.gradle.maven-central-library")
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 afterEvaluate {
     publishing {
         publications.withType<MavenPublication> {
