@@ -37,4 +37,4 @@ jobs:
       run: |
          export GPG_SIGNING_KEY="${{ secrets.OSSRH_GPG_SECRET_KEY }}"
          export GPG_SIGNING_PASSPHRASE=""
-         ./gradlew clean publish
+         ./gradlew clean build publish
