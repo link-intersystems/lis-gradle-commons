@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    implementation("com.link-intersystems.gradle.plugins:lis-gradle-maven-central:0.0.1")
+    implementation("com.link-intersystems.gradle.plugins:lis-gradle-maven-central:0.0.4")
 }
