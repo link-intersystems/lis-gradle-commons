@@ -51,7 +51,7 @@ esac
 echo "Executing ${RELEASE_STRATEGY} release"
 
 if [ ! -z "${RELEASE_VERSION}" ]; then
-  ${SCRIPT_DIR}/gradlew :updateVersion -Prelease.useAutomaticVersion=true -Prelease.newVersion=${RELEASE_VERSION}
+  ${SCRIPT_DIR}/gradlew -Prelease.useAutomaticVersion=true -Prelease.newVersion=${RELEASE_VERSION} :updateVersion :commitNewVersion
 fi
 
-exec ./gradlew -Prelease.useAutomaticVersion=true "$@" release
+#exec ./gradlew -Prelease.useAutomaticVersion=true "$@" release
