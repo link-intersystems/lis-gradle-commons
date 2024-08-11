@@ -48,6 +48,8 @@ case "$RELEASE_STRATEGY" in
       ;;
 esac
 
+echo "Execution ${RELEASE_STRATEGY} release"
+
 if [ ! -z "${RELEASE_VERSION}" ]; then
   ${SCRIPT_DIR}/gradlew :updateVersion -Prelease.useAutomaticVersion=true -Prelease.newVersion=${RELEASE_VERSION}
 fi
