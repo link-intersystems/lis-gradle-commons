@@ -26,6 +26,10 @@ configure(listOf(tasks.release, tasks.runBuildTasks)) {
                     gradle.startParameter.excludedTaskNames.forEach {
                         buildLauncher.addArguments("-x", it)
                     }
+                    gradle.startParameter.projectProperties.forEach { t, u ->
+                        buildLauncher.addArguments("-P$t=$u")
+                    }
+
                     buildLauncher.run()
                 }
         }
