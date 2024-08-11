@@ -41,8 +41,6 @@ then
     echo    # (optional) move to a new line
   fi
 
-  echo "ANSWER $ANSWER"
-  echo "DEFAULT_ANSWER $DEFAULT_ANSWER"
   if [[ $ANSWER =~ ^[Yy]$ || $DEFAULT_ANSWER =~ ^[Yy] ]]
   then
     git push --delete origin "$latest_tag"
