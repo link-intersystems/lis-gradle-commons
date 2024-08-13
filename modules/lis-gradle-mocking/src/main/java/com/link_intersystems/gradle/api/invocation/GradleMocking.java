@@ -34,7 +34,7 @@ public class GradleMocking {
     /**
      * Executes the {@link Action}s previously registered with {@link Gradle#settingsEvaluated(Action)}.
      */
-    public void settingsEvaluatedAction() {
+    public void execSettingsEvaluated() {
         List<Action<Settings>> settingsEvaluatedAction = getSettingsEvaluatedActions();
 
         Settings settings = getSettingMocking().getSettings();

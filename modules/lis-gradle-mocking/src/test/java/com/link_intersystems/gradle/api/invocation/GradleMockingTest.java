@@ -12,7 +12,7 @@ class GradleMockingTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    void settingsEvaluatedAction() {
+    void execSettingsEvaluated() {
         GradleMocking gradleMocking = new GradleMocking();
         Gradle gradle = gradleMocking.getGradle();
         Action<Settings> action = (Action<Settings>) mock(Action.class);
@@ -20,7 +20,7 @@ class GradleMockingTest {
         gradle.settingsEvaluated(action);
 
         verifyNoInteractions(action);
-        gradleMocking.settingsEvaluatedAction();
+        gradleMocking.execSettingsEvaluated();
         verify(action, times(1)).execute(gradleMocking.getSettingMocking().getSettings());
     }
 }
