@@ -1,10 +1,6 @@
-package com.link_intersystems.gradle.api.initialization;
+package com.link_intersystems.gradle.api;
 
-import com.link_intersystems.gradle.api.invocation.GradleMocking;
-import com.link_intersystems.gradle.api.plugins.ExtensionContainerMocking;
-import com.link_intersystems.gradle.api.provider.ProviderFactoryMocking;
 import org.gradle.api.initialization.Settings;
-import org.gradle.api.provider.ProviderFactory;
 
 import static java.util.Objects.requireNonNull;
 import static org.mockito.Mockito.mock;
@@ -20,16 +16,14 @@ public class SettingsMocking {
     private ProviderFactoryMocking providerFactoryMocking;
     private ExtensionContainerMocking extensionContainerMocking;
 
-    /**
-     * Creates a {@link SettingsMocking} with a new {@link GradleMocking}.
-     */
     public SettingsMocking() {
         this(new GradleMocking());
     }
 
-    public SettingsMocking(GradleMocking gradleMocking) {
+    SettingsMocking(GradleMocking gradleMocking) {
         this.settings = mock(Settings.class);
         this.gradleMocking = requireNonNull(gradleMocking);
+        gradleMocking.setSettingsMocking(this);
 
         when(settings.getGradle()).thenReturn(gradleMocking.getGradle());
 
@@ -58,4 +52,5 @@ public class SettingsMocking {
     public ProviderFactoryMocking getProvidersMocking() {
         return providerFactoryMocking;
     }
+
 }

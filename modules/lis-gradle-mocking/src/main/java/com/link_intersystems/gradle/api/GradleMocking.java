@@ -1,6 +1,5 @@
-package com.link_intersystems.gradle.api.invocation;
+package com.link_intersystems.gradle.api;
 
-import com.link_intersystems.gradle.api.initialization.SettingsMocking;
 import org.gradle.api.Action;
 import org.gradle.api.initialization.Settings;
 import org.gradle.api.invocation.Gradle;
@@ -24,7 +23,11 @@ public class GradleMocking {
         return gradle;
     }
 
-    public SettingsMocking getSettingMocking() {
+    void setSettingsMocking(SettingsMocking settingsMocking) {
+        this.settingsMocking = settingsMocking;
+    }
+
+    public SettingsMocking getSettingsMocking() {
         if (settingsMocking == null) {
             settingsMocking = new SettingsMocking(this);
         }
@@ -37,7 +40,7 @@ public class GradleMocking {
     public void execSettingsEvaluated() {
         List<Action<Settings>> settingsEvaluatedAction = getSettingsEvaluatedActions();
 
-        Settings settings = getSettingMocking().getSettings();
+        Settings settings = getSettingsMocking().getSettings();
 
         for (Action<Settings> settingsAction : settingsEvaluatedAction) {
             settingsAction.execute(settings);
@@ -51,4 +54,6 @@ public class GradleMocking {
 
         return captor.getAllValues();
     }
+
+
 }

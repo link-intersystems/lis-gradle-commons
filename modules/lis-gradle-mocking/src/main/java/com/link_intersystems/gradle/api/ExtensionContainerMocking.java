@@ -1,6 +1,5 @@
-package com.link_intersystems.gradle.api.plugins;
+package com.link_intersystems.gradle.api;
 
-import com.link_intersystems.gradle.api.provider.ProviderFactoryMocking;
 import org.gradle.api.plugins.ExtensionContainer;
 
 import static org.mockito.Mockito.mock;

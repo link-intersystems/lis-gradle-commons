@@ -1,4 +1,4 @@
-package com.link_intersystems.gradle.api.plugins;
+package com.link_intersystems.gradle.api;
 
 import org.gradle.api.plugins.ExtensionContainer;
 import org.junit.jupiter.api.BeforeEach;

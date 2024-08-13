@@ -1,4 +1,4 @@
-package com.link_intersystems.gradle.api.invocation;
+package com.link_intersystems.gradle.api;
 
 import org.gradle.api.Action;
 import org.gradle.api.initialization.Settings;
@@ -21,6 +21,6 @@ class GradleMockingTest {
 
         verifyNoInteractions(action);
         gradleMocking.execSettingsEvaluated();
-        verify(action, times(1)).execute(gradleMocking.getSettingMocking().getSettings());
+        verify(action, times(1)).execute(gradleMocking.getSettingsMocking().getSettings());
     }
 }

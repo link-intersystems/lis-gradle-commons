@@ -1,4 +1,4 @@
-package com.link_intersystems.gradle.api.provider;
+package com.link_intersystems.gradle.api;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

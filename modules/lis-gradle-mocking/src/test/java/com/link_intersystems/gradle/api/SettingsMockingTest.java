@@ -1,17 +1,29 @@
-package com.link_intersystems.gradle.api.initialization;
+package com.link_intersystems.gradle.api;
 
-import com.link_intersystems.gradle.api.plugins.ExtensionContainerMocking;
-import com.link_intersystems.gradle.api.provider.ProviderFactoryMocking;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class SettingsMockingTest {
 
+    private SettingsMocking settingsMocking;
+
+    @BeforeEach
+    void setUp() {
+        settingsMocking = new SettingsMocking();
+    }
+
+    @Test
+    void settingsGradleReturnsSameSettings() {
+        SettingsMocking gradleSettingsMocking = settingsMocking.getGradleMocking().getSettingsMocking();
+
+        assertSame(settingsMocking, gradleSettingsMocking);
+    }
+
     @Test
     void getExtensionContainerMocking() {
-        SettingsMocking settingsMocking = new SettingsMocking();
-
         ExtensionContainerMocking extensionContainerMocking = settingsMocking.getExtensionContainerMocking();
         assertNotNull(extensionContainerMocking);
 
@@ -20,8 +32,6 @@ class SettingsMockingTest {
 
     @Test
     void getProvidersMocking() {
-        SettingsMocking settingsMocking = new SettingsMocking();
-
         ProviderFactoryMocking providerFactoryMocking = settingsMocking.getProvidersMocking();
         assertNotNull(providerFactoryMocking);
 
@@ -30,8 +40,6 @@ class SettingsMockingTest {
 
     @Test
     void getGradleMocking() {
-        SettingsMocking settingsMocking = new SettingsMocking();
-
         assertNotNull(settingsMocking.getGradleMocking());
 
         assertNotNull(settingsMocking.getSettings().getGradle());

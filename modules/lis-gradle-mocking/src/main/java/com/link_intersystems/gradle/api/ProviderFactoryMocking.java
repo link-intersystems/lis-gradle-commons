@@ -1,4 +1,4 @@
-package com.link_intersystems.gradle.api.provider;
+package com.link_intersystems.gradle.api;
 
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.ProviderFactory;
