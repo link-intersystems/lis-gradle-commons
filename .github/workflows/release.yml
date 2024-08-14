@@ -62,9 +62,9 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: |
-          echo ${{ steps.validate.outputs.RELEASE_ARG }}
+          ./gradlew_release ${{ steps.validate.outputs.RELEASE_ARG }}
 
-#      - name: Push changes
-#        uses: ad-m/github-push-action@master
-#        with:
-#          github_token: ${{ secrets.PUSH_TOKEN}}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PUSH_TOKEN}}
