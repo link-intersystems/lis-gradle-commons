@@ -8,13 +8,11 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.20.2")
 }
 
-publishing {
-    afterEvaluate {
-        publications.withType<MavenPublication> {
-            pom {
-                name.set("Lis Gradle Project Builder")
-                description.set("Classes and utilities to build Gradle projects programmatically. Useful when writing Gradle plugin tests.")
-            }
+afterEvaluate {
+    publishing.publications.withType<MavenPublication> {
+        pom {
+            name.set("Lis Gradle Project Builder")
+            description.set("Classes and utilities to build Gradle projects programmatically. Useful when writing Gradle plugin tests.")
         }
     }
 }

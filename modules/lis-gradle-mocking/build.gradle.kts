@@ -10,13 +10,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
 }
 
-publishing {
-    afterEvaluate {
-        publications.withType<MavenPublication> {
-            pom {
-                name.set("Lis Gradle Mocking")
-                description.set("Mocking extension for Gradle plugin tests.")
-            }
+afterEvaluate {
+    publishing.publications.withType<MavenPublication> {
+        pom {
+            name.set("Lis Gradle Mocking")
+            description.set("Mocking extension for Gradle plugin tests.")
         }
     }
 }
