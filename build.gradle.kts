@@ -40,6 +40,6 @@ release {
     tagTemplate = "v\${version}"
 
     git {
-        pushToRemote = null
+        pushToRemote = ""
     }
 }
