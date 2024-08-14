@@ -40,6 +40,12 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
 
+      - name: Configure Git User
+        run: |
+          git config --global user.email "rene.link@link-intersystems.com"
+          git config --global user.name "René Link"
+
       - name: Build with Gradle Wrapper
-        run: ./gradlew_release ${{ inputs.releaseType }}
+        run: |
+          ./gradlew_release ${{ inputs.releaseType }}
 
