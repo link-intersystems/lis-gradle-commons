@@ -47,7 +47,7 @@ jobs:
 
       - name: Build with Gradle Wrapper
         env:
-          GH_TOKEN: ${{ secrets.PUSH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PUSH_TOKEN }}
         run: |
           ./gradlew_release ${{ inputs.releaseType }}
 
