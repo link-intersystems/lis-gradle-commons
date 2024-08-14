@@ -36,10 +36,12 @@ configure(listOf(tasks.release, tasks.runBuildTasks)) {
     }
 }
 
+val pushToRemoteName = if(project.findProperty("pushToRemote") != null) "origin" else ""
+
 release {
     tagTemplate = "v\${version}"
 
     git {
-        pushToRemote = ""
+        pushToRemote = pushToRemoteName
     }
 }
