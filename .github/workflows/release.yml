@@ -19,6 +19,10 @@ on:
           - patch
           - minor
           - major
+      releaseVersion:
+        description: 'Set the release version (overrides release type)'
+        required: false
+        type: string
 
 jobs:
   build:
@@ -50,9 +54,9 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: |
-          ./gradlew_release ${{ inputs.releaseType }}
+          echo ${{ inputs.releaseVersion || inputs.releaseType  }}
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.PUSH_TOKEN}}
+#      - name: Push changes
+#        uses: ad-m/github-push-action@master
+#        with:
+#          github_token: ${{ secrets.PUSH_TOKEN}}
