@@ -42,8 +42,8 @@ jobs:
 
       - name: Configure Git User
         run: |
-          git config --global user.email "rene.link@link-intersystems.com"
-          git config --global user.name "René Link"
+          git config user.email "rene.link@link-intersystems.com"
+          git config user.name "René Link"
 
       - name: Build with Gradle Wrapper
         run: |
