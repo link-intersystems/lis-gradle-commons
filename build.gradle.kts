@@ -38,4 +38,8 @@ configure(listOf(tasks.release, tasks.runBuildTasks)) {
 
 release {
     tagTemplate = "v\${version}"
+
+    git {
+        pushToRemote = null
+    }
 }
