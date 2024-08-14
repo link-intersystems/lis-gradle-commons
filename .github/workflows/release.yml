@@ -54,7 +54,10 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: |
-          echo ${{ inputs.releaseVersion || inputs.releaseType  }}
+          export RELEASE_ARG="${{ inputs.releaseVersion || inputs.releaseType  }}"
+          [[ "$RELEASE_ARG" =~ ^([0-9]+.[0-9]+.[0-9]+|patch|minor|major)$ ]] || \
+           { echo "$RELEASE_ARG is not a valid release argument! Use ^([0-9]+.[0-9]+.[0-9]+|patch|minor|major)$ "; exit 1; }  
+          echo $RELEASE_ARG
 
 #      - name: Push changes
 #        uses: ad-m/github-push-action@master
