@@ -21,6 +21,12 @@ increment_version() {
   local delimiter=.
   local array=($(echo "$1" | tr $delimiter '\n'))
   array[$2]=$((array[$2]+1))
+
+  for (( j=$(($2+1)); j<${#array[@]}; j++ ));
+  do
+    array[$j]=0
+  done
+
   echo $(local IFS=$delimiter ; echo "${array[*]}")
 }
 
@@ -54,4 +60,4 @@ if [ ! -z "${RELEASE_VERSION}" ]; then
   ${SCRIPT_DIR}/gradlew --info -Prelease.useAutomaticVersion=true -Prelease.newVersion=${RELEASE_VERSION} :updateVersion :commitNewVersion
 fi
 
-exec ./gradlew --info -Prelease.useAutomaticVersion=true "$@" release
+exec ./gradlew --info -Prelease.useAutomaticVersion=true release "$@"
