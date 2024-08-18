@@ -1,5 +1,5 @@
 plugins {
-    id("com.link-intersystems.gradle.maven-central-platform")
+    id("lis-gradle-commons-platform")
 }
 
 dependencies {
