@@ -29,7 +29,6 @@ then
 
   cherry_pick=$(git rev-list "$( git rev-list --grep="new version" ${latest_tag}..HEAD)..HEAD")
   git reset --hard "$latest_tag^"
-  git tag -d "$latest_tag"
   if [ ! -z "${cherry_pick}" ]; then
     echo "Found commits after the latest release ${latest_tag} to cherry-pick:"
     echo "$cherry_pick{}" | tr ' ' '\n'
@@ -39,6 +38,7 @@ then
   fi
 
  git branch -f ${current_branch} HEAD
+ git tag -d "$latest_tag"
 
   if ! [[ "$DEFAULT_ANSWER" =~ ^[Yy] ]]; then
     read -p "Do you want to force push the changes? " -n 1 -r ANSWER
