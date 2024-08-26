@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    implementation("com.link-intersystems.gradle.plugins:lis-gradle-common-plugins:0.0.8")
+    implementation("com.link-intersystems.gradle.plugins:lis-gradle-common-plugins:0.0.9")
 }
