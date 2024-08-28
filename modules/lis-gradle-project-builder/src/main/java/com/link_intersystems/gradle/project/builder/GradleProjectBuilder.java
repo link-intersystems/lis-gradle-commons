@@ -58,4 +58,10 @@ public class GradleProjectBuilder extends AbstractProjectBuilder {
         return new PropertiesFileContent(propertiesFile);
     }
 
+    public FileContent file(String path) throws IOException {
+        Path filepath = projectRoot.resolve(path);
+        Files.createDirectories(filepath.getParent());
+        return new FileContent(filepath);
+    }
+
 }

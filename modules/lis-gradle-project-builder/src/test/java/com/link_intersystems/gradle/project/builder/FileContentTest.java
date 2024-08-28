@@ -34,6 +34,17 @@ class FileContentTest {
     }
 
     @Test
+    void appendFromResource(@TempDir Path tempPath) {
+
+        Path testFile = tempPath.resolve("test.txt");
+        FileContent fileContent = new FileContent(testFile);
+
+        fileContent.append(getClass().getResource("test.txt"));
+
+        assertThat(testFile).hasContent("Hello World");
+    }
+
+    @Test
     void print(@TempDir Path tempPath) {
 
         Path testFile = tempPath.resolve("test.txt");
