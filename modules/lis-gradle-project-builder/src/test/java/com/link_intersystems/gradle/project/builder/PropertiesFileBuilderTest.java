@@ -10,7 +10,7 @@ import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PropertiesFileContentTest {
+class PropertiesFileBuilderTest {
 
     @Test
     void writeProperties(@TempDir Path tempDir) throws IOException {
@@ -19,7 +19,7 @@ class PropertiesFileContentTest {
         properties.setProperty("bar", "foo");
 
         Path propertiesFilepath = tempDir.resolve("test.properties");
-        PropertiesFileContent propertiesContent = new PropertiesFileContent(propertiesFilepath);
+        PropertiesFileBuilder propertiesContent = new PropertiesFileBuilder(propertiesFilepath);
         propertiesContent.append(properties);
 
         Properties readProperties = new Properties();

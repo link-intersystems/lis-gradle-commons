@@ -1,11 +1,12 @@
 package com.link_intersystems.gradle.project.builder;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Properties;
 
-public class PropertiesFileContent extends FileContent {
+public class PropertiesFileBuilder extends FileBuilder {
 
-    public PropertiesFileContent(Path filepath) {
+    public PropertiesFileBuilder(Path filepath) throws IOException {
         super(filepath);
     }
 

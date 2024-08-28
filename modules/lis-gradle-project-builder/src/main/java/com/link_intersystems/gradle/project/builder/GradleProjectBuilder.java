@@ -8,9 +8,9 @@ import static java.util.Objects.requireNonNull;
 
 public class GradleProjectBuilder extends AbstractProjectBuilder {
 
-    private final Path settingsFile;
+    private final FileBuilder settingsFile;
 
-    private final Path propertiesFile;
+    private final PropertiesFileBuilder propertiesFile;
 
     public static GradleProjectBuilder rootProject(Path projectRoot) throws IOException {
         return rootProject(projectRoot, ScriptLanguage.KTS);
@@ -25,10 +25,8 @@ public class GradleProjectBuilder extends AbstractProjectBuilder {
 
     public GradleProjectBuilder(Path projectRoot, ScriptLanguage scriptLanguage) throws IOException {
         super(projectRoot, scriptLanguage);
-        settingsFile = projectRoot.resolve(scriptLanguage.settingsFileName());
-        Files.createFile(settingsFile);
-
-        propertiesFile = projectRoot.resolve("gradle.properties");
+        settingsFile = file(scriptLanguage.settingsFileName());
+        propertiesFile = file("gradle.properties", PropertiesFileBuilder::new);
 
         this.projectRoot = requireNonNull(projectRoot);
     }
@@ -50,18 +48,12 @@ public class GradleProjectBuilder extends AbstractProjectBuilder {
         return new GradleSubprojectBuilder(getProjectRootDir().resolve(path), scriptLanguage);
     }
 
-    public FileContent settingsFile() {
-        return new FileContent(settingsFile);
+    public FileBuilder settingsFile() {
+        return settingsFile;
     }
 
-    public PropertiesFileContent gradleProperties() {
-        return new PropertiesFileContent(propertiesFile);
-    }
-
-    public FileContent file(String path) throws IOException {
-        Path filepath = projectRoot.resolve(path);
-        Files.createDirectories(filepath.getParent());
-        return new FileContent(filepath);
+    public PropertiesFileBuilder gradleProperties() {
+        return propertiesFile;
     }
 
 }

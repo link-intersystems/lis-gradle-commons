@@ -12,12 +12,19 @@ import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 import static java.util.Objects.requireNonNull;
 
-public class FileContent {
+public class FileBuilder {
 
     private final Path filepath;
 
-    public FileContent(Path filepath) {
+    public FileBuilder(Path filepath) throws IOException {
+        if (!Files.exists(filepath)) {
+            Files.createFile(filepath);
+        }
         this.filepath = requireNonNull(filepath);
+    }
+
+    public Path getPath() {
+        return filepath;
     }
 
     public void append(String contentToAppend) {

@@ -31,8 +31,8 @@ Once you created a GradleProjectBuilder you can write
 content to the build and settings files using the convenience methods.
 
 ```java
-FileContent fileContent = projectBuilder.buildFile();
-fileContent.append(printWriter -> {
+FileContent fileBuilder = projectBuilder.buildFile();
+fileBuilder.append(printWriter -> {
         printWriter.println("plugins {");
         printWriter.println("    `java-library`");
         printWriter.println("}");

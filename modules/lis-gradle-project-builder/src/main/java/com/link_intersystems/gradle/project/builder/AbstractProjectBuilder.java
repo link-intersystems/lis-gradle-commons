@@ -6,33 +6,26 @@ import java.nio.file.Path;
 
 import static java.util.Objects.requireNonNull;
 
-public class AbstractProjectBuilder {
-    private final Path projectRootDir;
+public class AbstractProjectBuilder extends DirectoryBuilder {
     private final ScriptLanguage scriptLanguage;
-    private final Path buildFile;
+    private final FileBuilder buildFile;
 
     public AbstractProjectBuilder(Path projectRootDir, ScriptLanguage scriptLanguage) throws IOException {
-        this.projectRootDir = requireNonNull(projectRootDir);
+        super(projectRootDir);
         this.scriptLanguage = requireNonNull(scriptLanguage);
 
-        buildFile = this.projectRootDir.resolve(scriptLanguage.buildFileName());
-
-        if (!Files.isDirectory(projectRootDir)) {
-            Files.createDirectories(this.projectRootDir);
-        }
-
-        Files.createFile(buildFile);
+        buildFile = file(scriptLanguage.buildFileName());
     }
 
     protected Path getProjectRootDir() {
-        return projectRootDir;
+        return getPath();
     }
 
     public ScriptLanguage getScriptLanguage() {
         return scriptLanguage;
     }
 
-    public FileContent buildFile() {
-        return new FileContent(buildFile);
+    public FileBuilder buildFile() {
+        return buildFile;
     }
 }
